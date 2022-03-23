@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WkHtmlConverter", "WkHtmlConverter\WkHtmlConverter.csproj", "{62D302AB-A60E-4543-89B2-EB3E197EA256}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{62D302AB-A60E-4543-89B2-EB3E197EA256}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62D302AB-A60E-4543-89B2-EB3E197EA256}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62D302AB-A60E-4543-89B2-EB3E197EA256}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62D302AB-A60E-4543-89B2-EB3E197EA256}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A1EFB622-FDC7-4814-A165-3A7173BEE027}
+	EndGlobalSection
+EndGlobal
