@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace WkHtmlConverter
 {
@@ -8,7 +7,7 @@ namespace WkHtmlConverter
     {
         private bool _disposed;
 
-        public bool IsLoaded { get; private set; } = false;
+        public bool IsLoaded { get; private set; }
 
         public bool ExtendedQt => WkHtmlToXBindings.wkhtmltoimage_extended_qt() == 1;
 
@@ -17,27 +16,21 @@ namespace WkHtmlConverter
 
         public void Dispose()
         {
-            Dispose(true);
+            Unload();
             GC.SuppressFinalize(this);
-        }
-
-        private void Dispose(bool disposing)
-        {
-            if (!_disposed)
-            {
-                WkHtmlToXBindings.wkhtmltopdf_deinit();
-
-                _disposed = true;
-            }
         }
 
         ~ImageConverterApiWrapper()
         {
-            Dispose(false);
+            Unload();
         }
 
         public void Load()
         {
+            if (_disposed)
+            {
+                throw new ObjectDisposedException(nameof(ImageConverterApiWrapper));
+            }
 
             if (IsLoaded)
             {
@@ -47,6 +40,17 @@ namespace WkHtmlConverter
             if (WkHtmlToXBindings.wkhtmltoimage_init(0) == 1)
             {
                 IsLoaded = true;
+            }
+        }
+        
+        private void Unload()
+        {
+            if (!_disposed)
+            {
+                WkHtmlToXBindings.wkhtmltoimage_deinit();
+
+                _disposed = true;
+                IsLoaded = false;
             }
         }
 
@@ -70,7 +74,6 @@ namespace WkHtmlConverter
 
         public IntPtr CreateConverter(IntPtr globalSettings) =>
             WkHtmlToXBindings.wkhtmltoimage_create_converter(globalSettings);
-
 
         public bool Convert(IntPtr converter) => WkHtmlToXBindings.wkhtmltoimage_convert(converter) == 1;
 
@@ -114,30 +117,5 @@ namespace WkHtmlConverter
             Marshal.PtrToStringAnsi(WkHtmlToXBindings.wkhtmltoimage_progress_string(converter)) ?? string.Empty;
 
         public int GetHttpErrorCode(IntPtr converter) => WkHtmlToXBindings.wkhtmltoimage_http_error_code(converter);
-    }
-
-    internal static class BufferExtensions
-    {
-        public static string ToUtf8String(this byte[] buffer, int offset = 0)
-        {
-            var nullTerminatorIndex = Array.FindIndex(buffer, 0, (x) => x == 0);
-            nullTerminatorIndex = (nullTerminatorIndex == -1) ? buffer.Length : nullTerminatorIndex;
-            return Encoding.UTF8.GetString(buffer, 0, nullTerminatorIndex);
-        }
-
-        public static string InvokeBufferToUtf8Action(Action<byte[]> bufferAction, int bufferSize = 2048)
-        {
-            var buffer = new byte[bufferSize];
-            bufferAction(buffer);
-            return buffer.ToUtf8String();
-        }
-
-        public static byte[] MarshalReturnBuffer(Func<(IntPtr, long)> apiFunction)
-        {
-            var (dataPointer, bufferLength) = apiFunction();
-            var buffer = new byte[bufferLength];
-            Marshal.Copy(dataPointer, buffer, 0, (int)bufferLength);
-            return buffer;
-        }
     }
 }
