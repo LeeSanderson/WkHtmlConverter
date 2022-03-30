@@ -7,11 +7,11 @@ namespace WkHtmlConverter.Tests
     public class SettingsApplierShould
     {
         private readonly SettingsApplier _settingsApplier;
-        private readonly Dictionary<string, string> _appliedSettings = new();
+        private readonly List<KeyValuePair<string, string?>> _appliedSettings = new();
 
         public SettingsApplierShould()
         {
-            _settingsApplier = new SettingsApplier((key, value) => _appliedSettings.Add(key, value));
+            _settingsApplier = new SettingsApplier((key, value) => _appliedSettings.Add(new KeyValuePair<string, string?>(key, value)));
         }
 
         [Fact]
@@ -41,10 +41,26 @@ namespace WkHtmlConverter.Tests
         [Fact]
         public void ProcessNonNullPropertiesToCreateSettings()
         {
-            _settingsApplier.Apply(new ImageConversionSettings() { CropLeft = 200 });
+            _settingsApplier.Apply(new ImageConversionSettings { CropLeft = 200 });
 
             _appliedSettings.Should().Contain("crop.left", "200");
             _appliedSettings.Count.Should().Be(1);
         }
+
+        [Fact]
+        public void ApplyDictionarySettings()
+        {
+            _settingsApplier.Apply("dictionary_setting",
+                new Dictionary<string, string> {{"one", "1"}, {"two", "2"}, {"three", "3"}});
+
+            _appliedSettings.Should().ContainInOrder(
+                new KeyValuePair<string, string?>("dictionary_setting.append", null),
+                new KeyValuePair<string, string?>("dictionary_setting[0]","one\n1"),
+                new KeyValuePair<string, string?>("dictionary_setting.append", null),
+                new KeyValuePair<string, string?>("dictionary_setting[1]", "two\n2"),
+                new KeyValuePair<string, string?>("dictionary_setting.append", null),
+                new KeyValuePair<string, string?>("dictionary_setting[2]", "three\n3"));
+        }
+
     }
 }

@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace WkHtmlConverter
 {
     public class SettingsApplier
     {
-        private readonly Action<string, string> _settingsAction;
+        private readonly Action<string, string?> _settingsAction;
 
-        public SettingsApplier(Action<string, string> settingsAction)
+        public SettingsApplier(Action<string, string?> settingsAction)
         {
             _settingsAction = settingsAction;
         }
@@ -19,6 +19,19 @@ namespace WkHtmlConverter
         public void Apply(string name, double value) => _settingsAction(name, value.ToString("0.##"));
 
         public void Apply(string name, string value) => _settingsAction(name, value);
+
+        public void Apply(string name, IEnumerable<KeyValuePair<string, string>> values)
+        {
+            // See https://github.com/wkhtmltopdf/wkhtmltopdf/blob/master/src/lib/reflect.hh#192 for list/dictionary ".append" implementation
+            // AND https://github.com/wkhtmltopdf/wkhtmltopdf/blob/master/src/lib/reflect.hh#148 for QPair<QString, QString> parsing 
+            int index = 0;
+            foreach (var value in values)
+            {
+                _settingsAction($"{name}.append", null);
+                _settingsAction($"{name}[{index}]", $"{value.Key}\n{value.Value}");
+                index++;
+            }
+        }
 
         public void Apply(ISettings settings)
         {
@@ -53,6 +66,9 @@ namespace WkHtmlConverter
                     break;
                 case double doubleValue:
                     Apply(name, doubleValue);
+                    break;
+                case IEnumerable<KeyValuePair<string, string>> dictionaryValues:
+                    Apply(name, dictionaryValues);
                     break;
                 default:
                     Apply(name, value.ToString());
