@@ -20,6 +20,8 @@ namespace WkHtmlConverter
 
         public void Apply(string name, string value) => _settingsAction(name, value);
 
+        public void Apply(string name, Enum value) => _settingsAction(name, value.ToString().ToLowerInvariant());
+
         public void Apply(string name, IEnumerable<KeyValuePair<string, string>> values)
         {
             // See https://github.com/wkhtmltopdf/wkhtmltopdf/blob/master/src/lib/reflect.hh#192 for list/dictionary ".append" implementation
@@ -66,6 +68,9 @@ namespace WkHtmlConverter
                     break;
                 case double doubleValue:
                     Apply(name, doubleValue);
+                    break;
+                case Enum enumValue:
+                    Apply(name, enumValue);
                     break;
                 case IEnumerable<KeyValuePair<string, string>> dictionaryValues:
                     Apply(name, dictionaryValues);

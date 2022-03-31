@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace WkHtmlConverter
+﻿namespace WkHtmlConverter
 {
     /// <summary>
     /// Settings for image conversion - see https://wkhtmltopdf.org/libwkhtmltox/pagesettings.html#pageImageGlobal
@@ -38,43 +36,58 @@ namespace WkHtmlConverter
         public string? CookieJarPath { get; set; }
 
         /// <summary>
-        /// load.* Page specific settings related to loading content, <see cref="LoadSettings"/>.
+        /// load.* Page specific settings related to loading content, <see cref="WkHtmlConverter.LoadSettings"/>.
         /// </summary>
         public LoadSettings? LoadSettings { get; set; }
-    }
-
-    public class LoadSettings
-    {
-        /// <summary>
-        /// load.username The user name to use when logging into a website, E.g. "Bart"
-        /// </summary>
-        [PropertySetting("load.username")]
-        public string? Username { get; set; }
 
         /// <summary>
-        /// load.password The password to used when logging into a website, E.g. "password123"
+        /// web.* Web page specific settings, <see cref="WkHtmlConverter.WebSettings"/>.
         /// </summary>
-        [PropertySetting("load.password")]
-        public string? Password { get; set; }
+        public WebSettings? WebSettings { get; set; }
 
         /// <summary>
-        /// load.jsdelay The mount of time in milliseconds to wait after a page has done loading until it is actually printed.
-        /// E.g. "1200". We will wait this amount of time or until, JavaScript calls window.print(). Default = 200
+        /// transparent When outputting a PNG or SVG, make the white background transparent. Must be either "true" or "false"
         /// </summary>
-        [PropertySetting("load.jsdelay")]
-        public int? JavaScriptDelay { get; set; }
+        [PropertySetting("transparent")]
+        public bool? Transparent { get; set; }
 
         /// <summary>
-        /// load.zoomFactor How much should we zoom in on the content? E.g. "2.2". Default = 1.0
+        /// in The URL or path of the input file, if "-" stdin is used, if null then data parameter from <see cref="ImageConverterApiWrapper.CreateConverter"/> is used. 
+        /// E.g. "http://google.com"
         /// </summary>
-        [PropertySetting("load.zoomFactor")]
-        public double? ZoomFactor { get; set; }
-
+        [PropertySetting("in")]
+        public string? InputUrl { get; set; }
 
         /// <summary>
-        /// load.customHeaders Custom headers used when requesting page.
+        /// out The path of the output file, if "-" stdout is used, if empty the content is stored to a internalBuffer
+        /// which can be accessed via <see cref="ImageConverterApiWrapper.GetConversionResult"/>.
         /// </summary>
-        [PropertySetting("load.customHeaders")]
-        public Dictionary<string, string>? CustomHeaders { get; set; }
+        [PropertySetting("out")]
+        public string? OutputPath { get; set; }
+
+        /// <summary>
+        /// fmt The output format to use, must be either "", "jpg", "png", "bmp" or "svg".
+        /// </summary>
+        [PropertySetting("fmt")]
+        public ImageOutputFormat? Format { get; set; }
+
+        /// <summary>
+        /// screenWidth The with of the screen used to render is pixels, e.g "800".
+        /// </summary>
+        [PropertySetting("screenWidth")]
+        public int? ScreenWidth { get; set; }
+
+        /// <summary>
+        /// smartWidth Should we expand the screenWidth if the content does not fit? must be either "true" or "false".
+        /// </summary>
+        [PropertySetting("smartWidth")]
+        public bool? SmartWidth { get; set; }
+
+        /// <summary>
+        /// quality The compression factor to use when outputting a JPEG image. E.g. "94".
+        /// </summary>
+        [PropertySetting("quality")]
+        public int? Quality { get; set; }
+
     }
 }

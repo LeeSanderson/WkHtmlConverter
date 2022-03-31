@@ -62,5 +62,13 @@ namespace WkHtmlConverter.Tests
                 new KeyValuePair<string, string?>("dictionary_setting[2]", "three\n3"));
         }
 
+        [Fact]
+        public void ApplyEnumSettingsAsLowercase()
+        {
+            _settingsApplier.Apply("enum.setting", LoadErrorHandling.Ignore);
+
+            _appliedSettings.Should().Contain("enum.setting", "ignore");
+        }
+
     }
 }

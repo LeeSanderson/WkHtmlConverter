@@ -160,7 +160,7 @@ namespace WkHtmlConverter
             byte* value, int valueSize);
 
         [DllImport(LibWkhtmlToXDllName, CharSet = CharSet, CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr wkhtmltoimage_create_converter(IntPtr globalSettings);
+        public static extern IntPtr wkhtmltoimage_create_converter(IntPtr globalSettings, [MarshalAs(Lputf8Str)] string? data);
 
         [DllImport(LibWkhtmlToXDllName, CharSet = CharSet, CallingConvention = CallingConvention.Cdecl)]
         public static extern void wkhtmltoimage_destroy_converter(IntPtr converter);

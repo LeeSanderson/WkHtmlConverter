@@ -72,8 +72,8 @@ namespace WkHtmlConverter
         public void DestroyGlobalSetting(IntPtr settings) =>
             WkHtmlToXBindings.wkhtmltoimage_destroy_global_settings(settings);
 
-        public IntPtr CreateConverter(IntPtr globalSettings) =>
-            WkHtmlToXBindings.wkhtmltoimage_create_converter(globalSettings);
+        public IntPtr CreateConverter(IntPtr globalSettings, string? data = null) =>
+            WkHtmlToXBindings.wkhtmltoimage_create_converter(globalSettings, data);
 
         public bool Convert(IntPtr converter) => WkHtmlToXBindings.wkhtmltoimage_convert(converter) == 1;
 
