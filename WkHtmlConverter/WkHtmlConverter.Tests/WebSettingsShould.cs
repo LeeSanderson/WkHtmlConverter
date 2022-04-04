@@ -7,7 +7,7 @@ namespace WkHtmlConverter.Tests
     public class WebSettingsShould
     {
         [Fact]
-        public void ConvertToExpectedSettingsWhenApplied()
+        public void ConvertToExpectedSettingsStringsWhenApplied()
         {
             var  appliedSettings = new List<KeyValuePair<string, string?>>();
             var settingsApplier = new SettingsApplier((key, value) => appliedSettings.Add(new KeyValuePair<string, string?>(key, value)));
