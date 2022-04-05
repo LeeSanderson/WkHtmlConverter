@@ -37,7 +37,7 @@ namespace WkHtmlConverter
 
         public void Apply(ISettings settings)
         {
-            var properties = settings.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
+            var properties = settings.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.GetProperty);
             foreach (var property in properties)
             {
                 var value = property.GetValue(settings);
