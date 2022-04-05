@@ -88,6 +88,5 @@
         /// </summary>
         [PropertySetting("quality")]
         public int? Quality { get; set; }
-
     }
 }
