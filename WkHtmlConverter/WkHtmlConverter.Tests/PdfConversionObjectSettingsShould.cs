@@ -13,14 +13,14 @@ namespace WkHtmlConverter.Tests
             var settingsApplier = new SettingsApplier((key, value) => appliedSettings.Add(new KeyValuePair<string, string?>(key, value)));
             var objectSettings = new PdfConversionObjectSettings
             {
+                PageUrl = "https://www.sixsideddice.com",
             };
 
             settingsApplier.Apply(objectSettings);
 
             appliedSettings
                 .Should()
-                .Contain("size.width", "210mm")
-                .And.Contain("load.cookieJar", "cookies.txt");
+                .Contain("page", "https://www.sixsideddice.com");
         }
     }
 }
