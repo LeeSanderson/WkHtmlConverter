@@ -32,5 +32,21 @@
         /// </summary>
         [PropertySetting("produceForms")]
         public bool? ProduceForms { get; set; }
+
+        public LoadSettings? LoadSettings { get; set; }
+        
+        public WebSettings? WebSettings { get; set; }
+
+        /// <summary>
+        /// includeInOutline Should the sections from this document be included in the outline and table of content?
+        /// </summary>
+        [PropertySetting("includeInOutline")]
+        public bool? IncludeInOutline { get; set; }
+
+        /// <summary>
+        /// pagesCount Should we count the pages of this document, in the counter used for TOC, headers and footers?
+        /// </summary>
+        [PropertySetting("pagesCount")]
+        public bool? PagesCount { get; set; }
     }
 }

@@ -39,7 +39,7 @@
         public double? FontScale { get; set; }
 
         /// <summary>
-        /// tocXsl If not empty this object is a table of content object, "page" is ignored and this XSL style sheet is used
+        /// tocXsl If not empty this object is a table of content object, "page" is ignored (see <see cref="PdfConversionObjectSettings.PageUrl"/>) and this XSL style sheet is used
         /// to convert the outline XML into a table of content.
         /// </summary>
         [PropertySetting("tocXsl")]
