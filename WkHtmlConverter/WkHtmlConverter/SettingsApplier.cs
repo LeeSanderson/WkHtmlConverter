@@ -43,9 +43,9 @@ namespace WkHtmlConverter
                 var value = property.GetValue(settings);
                 if (value != null)
                 {
-                    if (value.GetType().IsAssignableFrom(typeof(ISettings)))
+                    if (value is ISettings settingsValue)
                     {
-                        Apply((ISettings)value);
+                        Apply(settingsValue);
                     }
                     else
                     {

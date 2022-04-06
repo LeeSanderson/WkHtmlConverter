@@ -14,5 +14,23 @@
         public HeaderSettings? Header { get; set; }
 
         public FooterSettings? Footer { get; set; }
+
+        /// <summary>
+        /// useExternalLinks Should external links in the HTML document be converted into external pdf links? Must be either "true" or "false.
+        /// </summary>
+        [PropertySetting("useExternalLinks")]
+        public bool? UseExternalLinks { get; set; }
+
+        /// <summary>
+        /// useLocalLinks Should internal links in the HTML document be converted into pdf references? Must be either "true" or "false"
+        /// </summary>
+        [PropertySetting("useLocalLinks")]
+        public bool? UseLocalLinks { get; set; }
+
+        /// <summary>
+        /// produceForms Should we turn HTML forms into PDF forms? Must be either "true" or file".
+        /// </summary>
+        [PropertySetting("produceForms")]
+        public bool? ProduceForms { get; set; }
     }
 }
