@@ -7,4 +7,13 @@
 	  <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="libwkhtmltox.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <!-- Embed library so we can be sure it will be installed and in the right place on any system that the managed code assembly is being used -->
+	  <EmbeddedResource Include="libwkhtmltox.*" />
+  </ItemGroup>
+
 </Project>
