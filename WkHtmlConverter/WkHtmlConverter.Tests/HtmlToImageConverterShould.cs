@@ -18,7 +18,7 @@ namespace WkHtmlConverter.Tests
             VerifyImageSharp.Initialize();
         }
 
-        [UIFact]
+        [Fact]
         public Task CreateExpectedImageFromHtml()
         {
             const string generatedImageFileName = $"{nameof(CreateExpectedImageFromHtml)}.png";

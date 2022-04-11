@@ -69,7 +69,7 @@
         /// fmt The output format to use, must be either "", "jpg", "png", "bmp" or "svg".
         /// </summary>
         [PropertySetting("fmt")]
-        public ImageOutputFormat? Format { get; set; }
+        public ImageOutputFormat Format { get; set; } = ImageOutputFormat.Png;
 
         /// <summary>
         /// screenWidth The with of the screen used to render is pixels, e.g "800".

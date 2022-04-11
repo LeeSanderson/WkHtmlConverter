@@ -43,8 +43,8 @@ namespace WkHtmlConverter.Tests
         {
             _settingsApplier.Apply(new ImageConversionSettings { CropLeft = 200 });
 
-            _appliedSettings.Should().Contain("crop.left", "200");
-            _appliedSettings.Count.Should().Be(1);
+            _appliedSettings.Should().Contain("crop.left", "200").And.Contain("fmt", "png");
+            _appliedSettings.Count.Should().Be(2);
         }
 
         [Fact]
