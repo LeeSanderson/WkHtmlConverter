@@ -21,13 +21,14 @@ namespace WkHtmlConverter.Tests
         [UIFact]
         public Task CreateExpectedImageFromHtml()
         {
+            const string generatedImageFileName = $"{nameof(CreateExpectedImageFromHtml)}.png";
             var converter = new HtmlToImageConverter();
+
             var result = converter.Convert(new ImageConversionSettings { Format = ImageOutputFormat.Png }, "<h1>Hello World</h1>");
 
-
             result.Length.Should().BeGreaterThan(0);
-            File.WriteAllBytes("CreateExpectedImageFromHtml.png", result);
-            return VerifyFile("CreateExpectedImageFromHtml.png");
+            File.WriteAllBytes(generatedImageFileName, result);
+            return VerifyFile(generatedImageFileName);
         }
     }
 }
