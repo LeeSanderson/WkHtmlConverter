@@ -150,7 +150,7 @@ namespace WkHtmlConverter
             [MarshalAs(Lputf8Str)]
             string name,
             [MarshalAs(Lputf8Str)]
-            string value);
+            string? value);
 
 
         [DllImport(LibWkhtmlToXDllName, CharSet = CharSet)]
@@ -164,12 +164,6 @@ namespace WkHtmlConverter
 
         [DllImport(LibWkhtmlToXDllName, CharSet = CharSet, CallingConvention = CallingConvention.Cdecl)]
         public static extern void wkhtmltoimage_destroy_converter(IntPtr converter);
-
-        [DllImport(LibWkhtmlToXDllName, CharSet = CharSet, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void wkhtmltoimage_set_debug_callback(IntPtr converter, [MarshalAs(UnmanagedType.FunctionPtr)] StringCallback callback);
-
-        [DllImport(LibWkhtmlToXDllName, CharSet = CharSet, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void wkhtmltoimage_set_info_callback(IntPtr converter, [MarshalAs(UnmanagedType.FunctionPtr)] StringCallback callback);
 
         [DllImport(LibWkhtmlToXDllName, CharSet = CharSet, CallingConvention = CallingConvention.Cdecl)]
         public static extern void wkhtmltoimage_set_warning_callback(IntPtr converter, [MarshalAs(UnmanagedType.FunctionPtr)] StringCallback callback);

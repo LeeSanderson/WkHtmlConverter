@@ -57,7 +57,7 @@ namespace WkHtmlConverter
         public IntPtr CreateGlobalSettings() => 
             WkHtmlToXBindings.wkhtmltoimage_create_global_settings();
 
-        public int SetGlobalSetting(IntPtr settings, string name, string value) =>
+        public int SetGlobalSetting(IntPtr settings, string name, string? value) =>
             WkHtmlToXBindings.wkhtmltoimage_set_global_setting(settings, name, value);
 
         public unsafe string GetGlobalSetting(IntPtr settings, string name) =>
@@ -93,12 +93,6 @@ namespace WkHtmlConverter
 
         public void SetFinishedCallback(IntPtr converter, IntCallback callback) =>
             WkHtmlToXBindings.wkhtmltoimage_set_finished_callback(converter, callback);
-
-        public void SetDebugCallback(IntPtr converter, StringCallback callback) =>
-            WkHtmlToXBindings.wkhtmltoimage_set_debug_callback(converter, callback);
-
-        public void SetInfoCallback(IntPtr converter, StringCallback callback) =>
-            WkHtmlToXBindings.wkhtmltoimage_set_info_callback(converter, callback);
 
         public void SetWarningCallback(IntPtr converter, StringCallback callback) =>
             WkHtmlToXBindings.wkhtmltoimage_set_warning_callback(converter, callback);
