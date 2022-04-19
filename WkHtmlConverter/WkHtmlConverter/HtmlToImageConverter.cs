@@ -84,11 +84,5 @@ namespace WkHtmlConverter
         private void OnError(IntPtr converter, string message) =>  Error?.Invoke(this, new MessageEventArgs(message));
 
         private void OnWarning(IntPtr converter, string message) => Warning?.Invoke(this, new MessageEventArgs(message));
-        
-
-        private void LogCallBack(string severity, string message)
-        {
-            Console.WriteLine($"{severity}: {message}");
-        }
     }
 }

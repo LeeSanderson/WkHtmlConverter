@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -8,7 +7,8 @@ using System.Runtime.InteropServices;
 namespace WkHtmlConverter
 {
     /// <summary>
-    /// Thread-safe, lazy loaded singleton as described here: https://jonskeet.uk/csharp/singleton.html
+    /// Loader to ensure that the libwkhtmltox library is available - copying the embedded file to the local file system if necessary.
+    /// Implemented as a thread-safe, lazy loaded singleton as described here: https://jonskeet.uk/csharp/singleton.html
     /// </summary>
     internal sealed class WkLibraryLoader
     {
@@ -27,7 +27,6 @@ namespace WkHtmlConverter
                 _initializationException = e;
             }
         }
-
 
         public static WkLibraryLoader Instance => Nested.LazyInstance;
 

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.ComponentModel;
+using System.IO;
 using System.Threading.Tasks;
 using FluentAssertions;
 using VerifyTests;
@@ -29,6 +30,33 @@ namespace WkHtmlConverter.Tests
             result.Length.Should().BeGreaterThan(0);
             File.WriteAllBytes(generatedImageFileName, result);
             return VerifyFile(generatedImageFileName);
+        }
+
+        [Fact]
+        public async Task CreateExpectedImageFromHtmlInMultiThreadedEnvironment()
+        {
+            const string generatedImageFileName1 = $"{nameof(CreateExpectedImageFromHtmlInMultiThreadedEnvironment)}_1.png";
+            const string generatedImageFileName2 = $"{nameof(CreateExpectedImageFromHtmlInMultiThreadedEnvironment)}_2.png";
+
+            var tasks = new[]
+            {
+                Task.Run(() => DoConvert(new HtmlToImageConverter(), generatedImageFileName1)), 
+                Task.Run(() => DoConvert(new HtmlToImageConverter(), generatedImageFileName2))
+            };
+
+
+            await Task.WhenAll(tasks);
+            
+            await VerifyFile(generatedImageFileName1);
+            await VerifyFile(generatedImageFileName2);
+        }
+
+        private static void DoConvert(HtmlToImageConverter converter, string generatedImageFileName)
+        {
+            var result = converter.Convert(new ImageConversionSettings { Format = ImageOutputFormat.Png }, $"<h1>Hello from file {generatedImageFileName}</h1>");
+
+            result.Length.Should().BeGreaterThan(0);
+            File.WriteAllBytes(generatedImageFileName, result);
         }
     }
 }
