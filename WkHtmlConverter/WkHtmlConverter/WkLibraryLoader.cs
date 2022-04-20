@@ -14,7 +14,6 @@ namespace WkHtmlConverter
     {
         private readonly Exception? _initializationException;
 
-
         private WkLibraryLoader()
         {
             // Code here will only be called once when Instance is accessed

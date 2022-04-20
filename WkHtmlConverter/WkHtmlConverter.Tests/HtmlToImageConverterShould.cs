@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
 using FluentAssertions;
 using VerifyTests;
@@ -20,16 +19,16 @@ namespace WkHtmlConverter.Tests
         }
 
         [Fact]
-        public Task CreateExpectedImageFromHtml()
+        public async Task CreateExpectedImageFromHtml()
         {
             const string generatedImageFileName = $"{nameof(CreateExpectedImageFromHtml)}.png";
             var converter = new HtmlToImageConverter();
 
-            var result = converter.Convert(new ImageConversionSettings { Format = ImageOutputFormat.Png }, "<h1>Hello World</h1>");
+            var result = await converter.ConvertAsync(new ImageConversionSettings { Format = ImageOutputFormat.Png }, "<h1>Hello World</h1>");
 
             result.Length.Should().BeGreaterThan(0);
-            File.WriteAllBytes(generatedImageFileName, result);
-            return VerifyFile(generatedImageFileName);
+            await File.WriteAllBytesAsync(generatedImageFileName, result);
+            await VerifyFile(generatedImageFileName);
         }
 
         [Fact]
@@ -47,16 +46,16 @@ namespace WkHtmlConverter.Tests
 
             await Task.WhenAll(tasks);
             
-            await VerifyFile(generatedImageFileName1);
-            await VerifyFile(generatedImageFileName2);
+            await VerifyFile(generatedImageFileName1).UseMethodName($"{nameof(CreateExpectedImageFromHtmlInMultiThreadedEnvironment)}_1");
+            await VerifyFile(generatedImageFileName2).UseMethodName($"{nameof(CreateExpectedImageFromHtmlInMultiThreadedEnvironment)}_2");
         }
 
-        private static void DoConvert(HtmlToImageConverter converter, string generatedImageFileName)
+        private static async Task DoConvert(HtmlToImageConverter converter, string generatedImageFileName)
         {
-            var result = converter.Convert(new ImageConversionSettings { Format = ImageOutputFormat.Png }, $"<h1>Hello from file {generatedImageFileName}</h1>");
+            var result = await converter.ConvertAsync(new ImageConversionSettings { Format = ImageOutputFormat.Png }, $"<h1>Hello from file {generatedImageFileName}</h1>");
 
             result.Length.Should().BeGreaterThan(0);
-            File.WriteAllBytes(generatedImageFileName, result);
+            await File.WriteAllBytesAsync(generatedImageFileName, result);
         }
     }
 }

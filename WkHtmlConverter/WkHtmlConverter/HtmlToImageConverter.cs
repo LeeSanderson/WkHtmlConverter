@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace WkHtmlConverter
 {
@@ -33,7 +34,12 @@ namespace WkHtmlConverter
             GC.SuppressFinalize(this);
         }
 
-        public byte[] Convert(ImageConversionSettings settings, string html)
+        public async Task<byte[]> ConvertAsync(ImageConversionSettings settings, string html)
+        {
+            return await WkConversionExecutor.Instance.Queue(() => InternalConvert(settings, html)).ConfigureAwait(false);
+        }
+
+        private byte[] InternalConvert(ImageConversionSettings settings, string html)
         {
             _api.Load();
 
