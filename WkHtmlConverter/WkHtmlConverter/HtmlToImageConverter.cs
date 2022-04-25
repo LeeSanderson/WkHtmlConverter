@@ -1,26 +1,17 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Threading.Tasks;
 
 namespace WkHtmlConverter
 {
-    public class HtmlToImageConverter : IDisposable
+    public class HtmlToImageConverter : HtmlConverterBase<ImageConversionSettings>
     {
         private readonly ImageConverterApiWrapper _api;
 
-        public event EventHandler<MessageEventArgs>? Warning;
-        public event EventHandler<MessageEventArgs>? Error;
-        public event EventHandler<ConverterFinishedEventArgs>? Finished;
-        public event EventHandler<ProgressChangedEventArgs>? Progress;
-        public event EventHandler<PhaseChangedEventArgs>? PhaseChanged;
-
         public HtmlToImageConverter()
         {
-            WkLibraryLoader.Instance.Initialize();
             _api = new ImageConverterApiWrapper();
         }
 
-        protected virtual void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
@@ -28,18 +19,14 @@ namespace WkHtmlConverter
             }
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+        protected override string GetCurrentPhaseDescription(IntPtr converter, int currentPhase) =>
+            _api.GetCurrentPhaseDescription(converter, currentPhase);
 
-        public async Task<byte[]> ConvertAsync(ImageConversionSettings settings, string html)
-        {
-            return await WkConversionExecutor.Instance.Queue(() => InternalConvert(settings, html)).ConfigureAwait(false);
-        }
+        protected override int GetPhaseCount(IntPtr converter) => _api.GetPhaseCount(converter);
 
-        private byte[] InternalConvert(ImageConversionSettings settings, string html)
+        protected override int GetCurrentPhase(IntPtr converter) => _api.GetCurrentPhase(converter);
+
+        protected override byte[] InternalConvert(ImageConversionSettings settings, string? html)
         {
             _api.Load();
 
@@ -70,25 +57,5 @@ namespace WkHtmlConverter
                 _api.DestroyConverter(converterPtr);
             }
         }
-
-        private void OnPhaseChanged(IntPtr converter)
-        {
-            var currentPhase = _api.GetCurrentPhase(converter);
-            PhaseChanged?.Invoke(this,
-                new PhaseChangedEventArgs(
-                    currentPhase,
-                    _api.GetPhaseCount(converter),
-                    _api.GetCurrentPhaseDescription(converter, currentPhase)));
-        }
-
-        private void OnProgress(IntPtr converter, int progressPercentage) =>
-            Progress?.Invoke(this, new ProgressChangedEventArgs(progressPercentage, null));
-
-        private void OnFinished(IntPtr converter, int status) =>
-            Finished?.Invoke(this, new ConverterFinishedEventArgs {ConversionSuccessful = status == 1});
-
-        private void OnError(IntPtr converter, string message) =>  Error?.Invoke(this, new MessageEventArgs(message));
-
-        private void OnWarning(IntPtr converter, string message) => Warning?.Invoke(this, new MessageEventArgs(message));
     }
 }
