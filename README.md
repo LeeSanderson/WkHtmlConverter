@@ -6,13 +6,21 @@ the [wkhtmltox](https://github.com/wkhtmltopdf/wkhtmltopdf) library.
 
 Details of the command line tools wkhtmltopdf and wkhtmltoimage can be found on the [WK&lt;html&gt;TOpdf website](https://wkhtmltopdf.org/).
 
-The .net code works by using [P/Invoke](https://docs.microsoft.com/en-us/dotnet/standard/native-interop/pinvoke) to call the unmanaged code in the [libwkhtmltox](https://wkhtmltopdf.org/libwkhtmltox/) library. The libwkhtmltox is embedded in the .net assembly to make deploying applications that use the assembly easier. The library is extracted at runtime if it cannot be found on the path by the managed code. 
+The .net code works by using [P/Invoke](https://docs.microsoft.com/en-us/dotnet/standard/native-interop/pinvoke) to call the unmanaged code in the [libwkhtmltox](https://wkhtmltopdf.org/libwkhtmltox/) library. 
+The libwkhtmltox is embedded in the .net assembly to make deploying applications that use the assembly easier. 
+The library is extracted at runtime if it cannot be found on the path by the managed code. 
 
 ## Current version
 
-The WkHtmlConverter .net library is currently compiled and tested against [current stable version](https://wkhtmltopdf.org/downloads.html) of libwkhtmltox (version 0.12.6) which was release 11th June 2020.
+The WkHtmlConverter .net library is currently compiled and tested against the [current stable version](https://wkhtmltopdf.org/downloads.html) of 
+libwkhtmltox (version 0.12.6) which was release 11th June 2020. The underlying WebKit version included in this build is 534.34.
+This is roughly equivalent to [Safari version 5.0.6](https://en.wikipedia.org/wiki/Safari_version_history#Safari_5).
+Because this is an old version of WebKit, many modern HTML, JavaScript and CSS features [may not be supported](https://caniuse.com/?compare=safari+5&compareCats=all).
 
-To upgrade the version of libwkhtmltox complete the following steps:
+## Upgrading the current version
+In the unlikely event that a new version of libwkhtmltox becomes available then the project can be upgraded.
+
+To upgrade complete the following steps:
  - Go to the [download page](https://wkhtmltopdf.org/downloads.html).
  - Download the 64-bit Windows 7z Archive.
  - Extract the wkhtmltox.dll from the archive using [7zip](https://www.7-zip.org/) (from the "\wkhtmltox\bin\" path).

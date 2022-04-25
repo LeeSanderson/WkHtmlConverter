@@ -44,7 +44,7 @@ namespace WkHtmlConverter
             [MarshalAs(Lputf8Str)]
             string name,
             [MarshalAs(Lputf8Str)]
-            string value);
+            string? value);
 
 
         [DllImport(LibWkhtmlToXDllName, CharSet = CharSet)]
@@ -58,7 +58,7 @@ namespace WkHtmlConverter
             [MarshalAs(Lputf8Str)]
             string name,
             [MarshalAs(Lputf8Str)]
-            string value);
+            string? value);
 
         [DllImport(LibWkhtmlToXDllName, CharSet = CharSet)]
         public static extern int wkhtmltopdf_get_object_setting(IntPtr settings,
@@ -100,7 +100,7 @@ namespace WkHtmlConverter
         [DllImport(LibWkhtmlToXDllName, CharSet = CharSet, CallingConvention = CallingConvention.Cdecl)]
         public static extern void wkhtmltopdf_add_object(IntPtr converter,
             IntPtr objectSettings,
-            [MarshalAs(Lputf8Str)] string data);
+            [MarshalAs(Lputf8Str)] string? data);
 
         [DllImport(LibWkhtmlToXDllName, CharSet = CharSet, CallingConvention = CallingConvention.Cdecl)]
         public static extern int wkhtmltopdf_current_phase(IntPtr converter);

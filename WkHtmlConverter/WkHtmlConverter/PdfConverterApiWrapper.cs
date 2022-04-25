@@ -57,7 +57,7 @@ namespace WkHtmlConverter
         public IntPtr CreateGlobalSettings() =>
             WkHtmlToXBindings.wkhtmltopdf_create_global_settings();
 
-        public int SetGlobalSetting(IntPtr settings, string name, string value) =>
+        public int SetGlobalSetting(IntPtr settings, string name, string? value) =>
             WkHtmlToXBindings.wkhtmltopdf_set_global_setting(settings, name, value);
 
         public unsafe string GetGlobalSetting(IntPtr settings, string name) =>
@@ -74,7 +74,7 @@ namespace WkHtmlConverter
 
         public IntPtr CreateObjectSettings() => WkHtmlToXBindings.wkhtmltopdf_create_object_settings();
 
-        public int SetObjectSettings(IntPtr settings, string name, string value) =>
+        public int SetObjectSettings(IntPtr settings, string name, string? value) =>
             WkHtmlToXBindings.wkhtmltopdf_set_object_setting(settings, name, value);
 
         public unsafe string GetObjectSettings(IntPtr settings, string name) =>
@@ -86,7 +86,7 @@ namespace WkHtmlConverter
                 }
             });
 
-        public void AddObject(IntPtr converter, IntPtr objectSettings, string data) =>
+        public void AddObject(IntPtr converter, IntPtr objectSettings, string? data) =>
             WkHtmlToXBindings.wkhtmltopdf_add_object(converter, objectSettings, data);
 
         public void DestroyObjectSettings(IntPtr settings) =>

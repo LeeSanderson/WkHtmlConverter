@@ -2,7 +2,7 @@
 
 namespace WkHtmlConverter
 {
-    public class PdfConversionSettings
+    public class PdfConversionSettings : ISettings
     {
         public PdfConversionGlobalSettings GlobalSettings { get; set; } = new();
 
