@@ -36,8 +36,13 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- task: CopyFiles@2
+  condition: succeeded()
+  inputs:
+    contents: '**\bin\**\WkHtmlConverter.*.nupkg'
+    targetFolder: '$(Build.ArtifactStagingDirectory)/nuget'
+
 - task: PublishPipelineArtifact@1
   condition: succeeded()
   inputs:
-    targetPath: |
-      **\bin\**\WkHtmlConverter.*.nupkg
+    targetPath: '$(Build.ArtifactStagingDirectory)/nuget'
