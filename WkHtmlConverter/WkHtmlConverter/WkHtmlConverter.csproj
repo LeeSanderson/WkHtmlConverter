@@ -1,19 +1,29 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	  <TargetFramework>netstandard2.0</TargetFramework>
-	  <LangVersion>9</LangVersion>
-	  <Nullable>enable</Nullable>
-	  <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>9</LangVersion>
+		<Nullable>enable</Nullable>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="libwkhtmltox.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
-	  <!-- Embed library so we can be sure it will be installed and in the right place on any system that the managed code assembly is being used -->
-	  <EmbeddedResource Include="libwkhtmltox.*" />
-  </ItemGroup>
+	<PropertyGroup>
+		<PackageId>WkHtmlConverter</PackageId>
+		<Version>0.1.0</Version>
+		<Authors>Lee Sanderson</Authors>
+		<Company>SixSidedDice.com</Company>
+		<Description>
+			Cross-platform .NET standard P/Invoke wrapper for wkhtmltopdf library that uses Webkit engine (approximately equivalent to Safari 5.0.6) 
+			to convert HTML pages to PDF and Images.
+		</Description>
+		<PackageTags>wkhtmltopdf;netstandard;html;pdf;png;image;wrapper</PackageTags>
+	</PropertyGroup>
+	
+	
+	<ItemGroup>
+		<!-- Embed library so we can be sure it will be installed and in the right place on any system that the managed code assembly is being used -->
+		<EmbeddedResource Include="libwkhtmltox.*" />
+	</ItemGroup>
 
 </Project>

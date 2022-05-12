@@ -17,7 +17,7 @@ namespace WkHtmlConverter.Tests
             CustomVerifyImageSharp.Initialize();
         }
 
-        [Fact]
+        [Fact(Skip = TestConfiguration.SkipImageConverterTestsForPipelineBuilds)]
         public async Task CreateExpectedImageFromHtml()
         {
             const string generatedImageFileName = $"{nameof(CreateExpectedImageFromHtml)}.png";
@@ -30,7 +30,7 @@ namespace WkHtmlConverter.Tests
             await VerifyFile(generatedImageFileName);
         }
 
-        [Fact]
+        [Fact(Skip = TestConfiguration.SkipImageConverterTestsForPipelineBuilds)]
         public async Task CreateExpectedImageFromHtmlInMultiThreadedEnvironment()
         {
             const string generatedImageFileName1 = $"{nameof(CreateExpectedImageFromHtmlInMultiThreadedEnvironment)}_1.png";
@@ -49,7 +49,7 @@ namespace WkHtmlConverter.Tests
             await VerifyFile(generatedImageFileName2).UseMethodName($"{nameof(CreateExpectedImageFromHtmlInMultiThreadedEnvironment)}_2");
         }
 
-        [Fact]
+        [Fact(Skip = TestConfiguration.SkipImageConverterTestsForPipelineBuilds)]
         public async Task CreateExpectedImageContainingUserAgentFromHtml()
         {
             const string generatedImageFileName = $"{nameof(CreateExpectedImageFromHtml)}.jpg";
