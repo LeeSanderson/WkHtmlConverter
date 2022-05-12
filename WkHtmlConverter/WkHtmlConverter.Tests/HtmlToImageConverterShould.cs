@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 using FluentAssertions;
-using VerifyTests;
 using VerifyXunit;
 using Xunit;
 
@@ -15,7 +14,7 @@ namespace WkHtmlConverter.Tests
 
         static HtmlToImageConverterShould()
         {
-            VerifyImageSharp.Initialize();
+            CustomVerifyImageSharp.Initialize();
         }
 
         [Fact]
