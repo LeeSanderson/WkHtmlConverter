@@ -39,4 +39,5 @@ steps:
 - task: PublishPipelineArtifact@1
   condition: succeeded()
   inputs:
-    targetPath: **\bin\**\WkHtmlConverter.*.nupkg
+    targetPath: |
+      **\bin\**\WkHtmlConverter.*.nupkg
