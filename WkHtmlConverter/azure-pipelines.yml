@@ -36,3 +36,7 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- task: PublishPipelineArtifact@1
+  condition: succeeded()
+  inputs:
+    targetPath: **\bin\**\WkHtmlConverter.*.nupkg
