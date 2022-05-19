@@ -15,6 +15,7 @@ resources:
 trigger: none
 pr: none
 
+steps:
 - task: NuGetAuthenticate@0
   inputs:
     nuGetServiceConnections: NugetOrgServiceConnection
