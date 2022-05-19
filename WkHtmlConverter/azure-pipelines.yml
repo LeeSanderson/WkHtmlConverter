@@ -57,3 +57,4 @@ steps:
   condition: succeeded()
   inputs:
     targetPath: '$(Build.ArtifactStagingDirectory)/nuget'
+    artifactName: NuGetPackage

@@ -15,12 +15,16 @@ resources:
 trigger: none
 pr: none
 
+variables:
+  - group: SharedVariables
+
 steps:
-- task: NuGetAuthenticate@0
+- task: DownloadPipelineArtifact@2
   inputs:
-    nuGetServiceConnections: NugetOrgServiceConnection
+    artifact: NuGetPackage
+    path: $(Build.SourcesDirectory)
 
 - task: UseDotNet@2 # ensure the .NET Core SDK is installed
 
-- script: dotnet nuget push WkHtmlConverter.*.nupkg --api-key AzureArtifacts
+- script: dotnet nuget push $(Build.SourcesDirectory)\WkHtmlConverter.*.nupkg --api-key $(NuGetApiKey)
 
