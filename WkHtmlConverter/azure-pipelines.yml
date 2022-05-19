@@ -41,6 +41,7 @@ steps:
   inputs:
     contents: 'WkHtmlConverter\WkHtmlConverter\bin\$(buildConfiguration)\WkHtmlConverter.*.nupkg'
     targetFolder: '$(Build.ArtifactStagingDirectory)/nuget'
+    flattenFolders: true
 
 - task: PublishPipelineArtifact@1
   condition: succeeded()
