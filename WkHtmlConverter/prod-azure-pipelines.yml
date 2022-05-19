@@ -19,12 +19,10 @@ variables:
   - group: SharedVariables
 
 steps:
-- task: DownloadPipelineArtifact@2
-  inputs:
-    artifact: NuGetPackage
-    path: $(Build.SourcesDirectory)
+- download: WkHtmlConverterBuild
+  artifact: NuGetPackage
 
 - task: UseDotNet@2 # ensure the .NET Core SDK is installed
 
-- script: dotnet nuget push $(Build.SourcesDirectory)\WkHtmlConverter.*.nupkg --api-key $(NuGetApiKey)
+- script: dotnet nuget push $(Pipeline.Workspace)\WkHtmlConverter.*.nupkg --api-key $(NuGetApiKey)
 
