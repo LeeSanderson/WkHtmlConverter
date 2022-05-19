@@ -39,7 +39,7 @@ steps:
 - task: CopyFiles@2
   condition: succeeded()
   inputs:
-    contents: '**\bin\**\WkHtmlConverter.*.nupkg'
+    contents: 'WkHtmlConverter\WkHtmlConverter\bin\$(buildConfiguration)\WkHtmlConverter.*.nupkg'
     targetFolder: '$(Build.ArtifactStagingDirectory)/nuget'
 
 - task: PublishPipelineArtifact@1
