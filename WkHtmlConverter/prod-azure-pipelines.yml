@@ -1,0 +1,25 @@
+pool:
+  vmImage: 'windows-latest'
+
+# Trigger production build (i.e. Nuget publish) after successful build pipeline run on main branch
+resources:
+  pipelines:
+    - pipeline: WkHtmlConverterBuild
+      source: "WkHtmlConverterBuild"
+      trigger:
+        enabled: true
+        branches:
+          include:
+            - main
+
+trigger: none
+pr: none
+
+- task: NuGetAuthenticate@0
+  inputs:
+    nuGetServiceConnections: NugetOrgServiceConnection
+
+- task: UseDotNet@2 # ensure the .NET Core SDK is installed
+
+- script: dotnet nuget push WkHtmlConverter.*.nupkg --api-key AzureArtifacts
+

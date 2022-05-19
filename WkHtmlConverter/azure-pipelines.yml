@@ -1,8 +1,18 @@
-trigger:
-- main
-
 pool:
   vmImage: 'windows-latest'
+
+pr:
+  autoCancel: true
+  branches:
+    include:
+      - "*"
+  drafts: false
+
+trigger:
+  batch: true
+  branches:
+    include:
+      - "*"
 
 variables:
   - group: SharedVariables
