@@ -1,4 +1,11 @@
+<img align="left" style="padding-right:20px" width="128" height="90" src="WkHtmlConverter/WkHtmlConverter/NuGet/icon.png" />
+
 # WkHtmlConverter
+
+[![Build Status](https://dev.azure.com/sixsideddice/SixSidedDice/_apis/build/status/WkHtmlConverterProd?branchName=main)](https://dev.azure.com/sixsideddice/SixSidedDice/_build/latest?definitionId=3&branchName=main)
+![Nuget](https://img.shields.io/nuget/dt/WkHtmlConverter)
+![Nuget](https://img.shields.io/nuget/v/WkHtmlConverter)
+
 A cross platform .net library for converting HTML to PDF and HTML to images using 
 the [wkhtmltox](https://github.com/wkhtmltopdf/wkhtmltopdf) library.
 
@@ -11,6 +18,8 @@ The libwkhtmltox is embedded in the .net assembly to make deploying applications
 The library is extracted at runtime if it cannot be found on the path by the managed code. 
 
 ## Current version
+
+
 
 The WkHtmlConverter .net library is currently compiled and tested against the [current stable version](https://wkhtmltopdf.org/downloads.html) of 
 libwkhtmltox (version 0.12.6) which was release 11th June 2020. The underlying WebKit version included in this build is 534.34.

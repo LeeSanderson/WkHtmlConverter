@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="icon.html" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="6.5.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="Verify.DocNet" Version="1.1.0" />
@@ -27,6 +31,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WkHtmlConverter\WkHtmlConverter.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+	<EmbeddedResource Include="icon.html" />
   </ItemGroup>
 
 </Project>

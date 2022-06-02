@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
@@ -10,20 +10,34 @@
 
 	<PropertyGroup>
 		<PackageId>WkHtmlConverter</PackageId>
-		<Version>0.1.0</Version>
+		<Version>0.1.1</Version>
 		<Authors>Lee Sanderson</Authors>
 		<Company>SixSidedDice.com</Company>
-		<Description>
-			Cross-platform .NET standard P/Invoke wrapper for wkhtmltopdf library that uses Webkit engine (approximately equivalent to Safari 5.0.6) 
-			to convert HTML pages to PDF and Images.
-		</Description>
-		<PackageTags>wkhtmltopdf;netstandard;html;pdf;png;image;wrapper</PackageTags>
+		<Description>Cross-platform .NET standard P/Invoke wrapper for the wkhtmltopdf and wkhtmltoimage library that uses Webkit engine (approximately equivalent to Safari 5.0.6) to convert HTML pages to PDF and Images.</Description>
+		<PackageTags>wkhtmltopdf;wkhtmltoimage;netstandard;html;pdf;png;image;wrapper</PackageTags>
+    	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageIcon>icon.png</PackageIcon>
+		<PackageReadmeFile>PackageReadme.md</PackageReadmeFile>
+		<IncludeSymbols>true</IncludeSymbols>
+    	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 	</PropertyGroup>
 	
 	
 	<ItemGroup>
 		<!-- Embed library so we can be sure it will be installed and in the right place on any system that the managed code assembly is being used -->
 		<EmbeddedResource Include="libwkhtmltox.*" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<None Include="NuGet\icon.png" Pack="true" PackagePath="\"/>
+		<None Include="NuGet\PackageReadme.md" Pack="true" PackagePath="\"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
 	</ItemGroup>
 
 </Project>
