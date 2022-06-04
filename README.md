@@ -2,7 +2,7 @@
 
 # WkHtmlConverter
 
-[![Build Status](https://dev.azure.com/sixsideddice/SixSidedDice/_apis/build/status/WkHtmlConverterProd?branchName=main)](https://dev.azure.com/sixsideddice/SixSidedDice/_build/latest?definitionId=3&branchName=main)
+![Build Status](https://dev.azure.com/sixsideddice/SixSidedDice/_apis/build/status/WkHtmlConverterProd?branchName=main)
 ![Nuget](https://img.shields.io/nuget/dt/WkHtmlConverter)
 ![Nuget](https://img.shields.io/nuget/v/WkHtmlConverter)
 
