@@ -1,4 +1,4 @@
-<img align="left" style="padding-right:20px" width="128" height="90" src="WkHtmlConverter/WkHtmlConverter/NuGet/icon.png" />
+<img align="left" style="padding-right:20px" width="128" height="128" src="WkHtmlConverter/WkHtmlConverter/NuGet/icon.png" />
 
 # WkHtmlConverter
 
