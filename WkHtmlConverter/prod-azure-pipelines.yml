@@ -24,5 +24,7 @@ steps:
 
 - task: UseDotNet@2 # ensure the .NET Core SDK is installed
 
-- script: dotnet -d nuget push $(Pipeline.Workspace)\WkHtmlConverterBuild\NuGetPackage\WkHtmlConverter.*.nupkg --api-key $(NuGetApiKey) --source https://api.nuget.org/v3/index.json
+- script: dotnet -d nuget push "*.nupkg" --api-key $(NuGetApiKey) --source https://api.nuget.org/v3/index.json
+  workingDirectory: $(Pipeline.Workspace)\WkHtmlConverterBuild\NuGetPackage\
+  displayName: Publish to NuGet
 

@@ -38,5 +38,6 @@ await File.WriteAllBytesAsync("HelloWorld.pdf", result);
 
 | Version | Major Changes |  
 | --- | --- | 
+| 0.1.2 | Publish symbols |  
 | 0.1.1 | Tidy up NugGet package, changed to MIT licence |  
 | 0.1.0 | Initial version |  
