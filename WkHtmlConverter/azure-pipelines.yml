@@ -53,6 +53,13 @@ steps:
     targetFolder: '$(Build.ArtifactStagingDirectory)/nuget'
     flattenFolders: true
 
+- task: CopyFiles@2
+  condition: succeeded()
+  inputs:
+    contents: 'WkHtmlConverter\WkHtmlConverter\bin\$(buildConfiguration)\WkHtmlConverter.*.snupkg'
+    targetFolder: '$(Build.ArtifactStagingDirectory)/nuget'
+    flattenFolders: true
+
 - task: PublishPipelineArtifact@1
   condition: succeeded()
   inputs:

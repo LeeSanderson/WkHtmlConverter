@@ -10,7 +10,7 @@
 
 	<PropertyGroup>
 		<PackageId>WkHtmlConverter</PackageId>
-		<Version>0.1.2</Version>
+		<Version>0.1.3</Version>
 		<Authors>Lee Sanderson</Authors>
 		<Company>SixSidedDice.com</Company>
 		<Description>Cross-platform .NET standard P/Invoke wrapper for the wkhtmltopdf and wkhtmltoimage library that uses Webkit engine (approximately equivalent to Safari 5.0.6) to convert HTML pages to PDF and Images.</Description>
