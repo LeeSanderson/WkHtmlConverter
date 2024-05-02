@@ -26,6 +26,8 @@ namespace WkHtmlConverter
                 Name = "WkHtmlConverter worker thread"
             };
 
+            _conversionThread.SetApartmentState(ApartmentState.STA);
+
             _conversionThread.Start();
         }
 
@@ -52,6 +54,7 @@ namespace WkHtmlConverter
                     }
                 }
             }
+            // ReSharper disable once FunctionNeverReturns
         }
 
         // ReSharper disable once ClassNeverInstantiated.Local
